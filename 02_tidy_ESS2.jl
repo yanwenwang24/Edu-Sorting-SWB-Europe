@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 01_ESS2.jl
+## Script name: 02_tidy_ESS2.jl
 ## Purpose: Clean ESS2 data
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-25
