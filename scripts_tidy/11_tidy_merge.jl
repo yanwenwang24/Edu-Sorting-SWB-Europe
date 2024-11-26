@@ -34,7 +34,7 @@ ESS = vcat(
 )
 
 @transform!(ESS, :pid = 1:nrow(ESS))
-@transform!(sample, :essround = Int.(:essround))
+@transform!(ESS, :essround = Int.(:essround))
 
 # 2 Educational sorting indicators ----------------------------------------
 
