@@ -13,7 +13,7 @@
 ## ------------------------------------------------------------------------
 
 # Country and region
-region_dict = Dict
+region_dict = Dict(
     # Nordic countries
     "DK" => "Nordic",    # Denmark
     "FI" => "Nordic",    # Finland
@@ -63,3 +63,4 @@ region_dict = Dict
     "ME" => "Central & Eastern",    # Montenegro
     "RS" => "Central & Eastern",    # Serbia
     "MK" => "Central & Eastern"     # North Macedonia
+)
