@@ -322,7 +322,7 @@ select!(
     :lsat,
     :female,
     :age,
-    :marital, :mstat, :divorce,
+    :mstat, :divorce,
     :immigrant,
     :minority,
     :hhsize,
