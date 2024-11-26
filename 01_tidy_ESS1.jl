@@ -181,7 +181,7 @@ select!(
     :edulvla => :edu_r,
     :edulvlpa => :edu_s,
     :pdjobev,
-    :empl,
+    :uempla, :uempli,
     :hincfel,
     :child_count, :child_present,
     :child_under6_count, :child_under6_present,
@@ -272,7 +272,7 @@ ESS1 = @chain ESS1 begin
         )
     )
     @transform(:pdjobev = recode(:pdjobev, 1 => 1, 2 => 0, missing => missing))
-    @transform(:empl = recode(:empl, 1 => 1, 2 => 1, 3 => 0, missing => missing))
+    @transform(:uempl = ifelse.(:uempla .== 1 .|| :uempli .== 1, 1, 0))
 end
 
 # Married vs. cohabiting vs. other
@@ -333,7 +333,7 @@ select!(
     :edu5_r, :edu4_r, :edu3_r,
     :edu5_s, :edu4_s, :edu3_s,
     :pdjobev,
-    :empl,
+    :uempl,
     :hincfel,
     :child_count, :child_present,
     :child_under6_count, :child_under6_present,
