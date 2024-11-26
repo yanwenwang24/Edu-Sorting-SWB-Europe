@@ -205,6 +205,7 @@ ESS5_AT = @chain ESS5_AT begin
     @transform(
         :edu5_r = recode(
             :edu_r,
+            0 => missing,
             1 => 1,
             2 => 2,
             3 => 3,
@@ -217,6 +218,7 @@ ESS5_AT = @chain ESS5_AT begin
         ),
         :edu5_s = recode(
             :edu_s,
+            0 => missing,
             1 => 1,
             2 => 2,
             3 => 3,
@@ -231,6 +233,7 @@ ESS5_AT = @chain ESS5_AT begin
     @transform(
         :edu4_r = recode(
             :edu_r,
+            0 => missing,
             1 => 1,
             2 => 1,
             3 => 2,
@@ -243,6 +246,7 @@ ESS5_AT = @chain ESS5_AT begin
         ),
         :edu4_s = recode(
             :edu_s,
+            0 => missing,
             1 => 1,
             2 => 1,
             3 => 2,
@@ -257,6 +261,7 @@ ESS5_AT = @chain ESS5_AT begin
     @transform(
         :edu3_r = recode(
             :edu_r,
+            0 => missing,
             1 => 1,
             2 => 1,
             3 => 2,
@@ -269,6 +274,7 @@ ESS5_AT = @chain ESS5_AT begin
         ),
         :edu3_s = recode(
             :edu_s,
+            0 => missing,
             1 => 1,
             2 => 1,
             3 => 2,
