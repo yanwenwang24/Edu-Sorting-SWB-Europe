@@ -13,54 +13,53 @@
 ## ------------------------------------------------------------------------
 
 # Country and region
-region_dict = Dict(
+region_dict = Dict
     # Nordic countries
-    "DK" => "nordic",    # Denmark
-    "FI" => "nordic",    # Finland
-    "IS" => "nordic",    # Iceland
-    "NO" => "nordic",    # Norway
-    "SE" => "nordic",    # Sweden
+    "DK" => "Nordic",    # Denmark
+    "FI" => "Nordic",    # Finland
+    "IS" => "Nordic",    # Iceland
+    "NO" => "Nordic",    # Norway
+    "SE" => "Nordic",    # Sweden
     
     # Continental countries
-    "AT" => "continental",    # Austria
-    "BE" => "continental",    # Belgium
-    "FR" => "continental",    # France
-    "DE" => "continental",    # Germany
-    "NL" => "continental",    # Netherlands
-    "CH" => "continental",    # Switzerland
-    "LU" => "continental",    # Luxembourg
+    "AT" => "Continental",    # Austria
+    "BE" => "Continental",    # Belgium
+    "FR" => "Continental",    # France
+    "DE" => "Continental",    # Germany
+    "NL" => "Continental",    # Netherlands
+    "CH" => "Continental",    # Switzerland
+    "LU" => "Continental",    # Luxembourg
     
     # Southern countries
-    "CY" => "southern",    # Cyprus
-    "GR" => "southern",    # Greece
-    "IT" => "southern",    # Italy
-    "PT" => "southern",    # Portugal
-    "ES" => "southern",    # Spain
-    "TR" => "southern",    # Turkey
+    "CY" => "Southern",    # Cyprus
+    "GR" => "Southern",    # Greece
+    "IT" => "Southern",    # Italy
+    "PT" => "Southern",    # Portugal
+    "ES" => "Southern",    # Spain
+    "TR" => "Southern",    # Turkey
     
     # Anglo-Saxon countries
-    "IE" => "anglo",    # Ireland
-    "GB" => "anglo",    # United Kingdom
+    "IE" => "Anglo-Saxon",    # Ireland
+    "GB" => "Anglo-Saxon",    # United Kingdom
     
     # Baltic countries
-    "EE" => "baltic",    # Estonia
-    "LV" => "baltic",    # Latvia
-    "LT" => "baltic",    # Lithuania
+    "EE" => "Baltic",    # Estonia
+    "LV" => "Baltic",    # Latvia
+    "LT" => "Baltic",    # Lithuania
     
     # Eastern countries
-    "BG" => "eastern",    # Bulgaria
-    "CZ" => "eastern",    # Czechia
-    "HR" => "eastern",    # Croatia
-    "HU" => "eastern",    # Hungary
-    "PL" => "eastern",    # Poland
-    "RU" => "eastern",    # Russia
-    "SK" => "eastern",    # Slovakia
-    "SI" => "eastern",    # Slovenia
-    "UA" => "eastern",    # Ukraine
-    "RO" => "eastern",    # Romania
-    "AL" => "eastern",    # Albania
-    "XK" => "eastern",    # Kosovo
-    "ME" => "eastern",    # Montenegro
-    "RS" => "eastern",    # Serbia
-    "MK" => "eastern"     # North Macedonia
-)
+    "BG" => "Central & Eastern",    # Bulgaria
+    "CZ" => "Central & Eastern",    # Czechia
+    "HR" => "Central & Eastern",    # Croatia
+    "HU" => "Central & Eastern",    # Hungary
+    "PL" => "Central & Eastern",    # Poland
+    "RU" => "Central & Eastern",    # Russia
+    "SK" => "Central & Eastern",    # Slovakia
+    "SI" => "Central & Eastern",    # Slovenia
+    "UA" => "Central & Eastern",    # Ukraine
+    "RO" => "Central & Eastern",    # Romania
+    "AL" => "Central & Eastern",    # Albania
+    "XK" => "Central & Eastern",    # Kosovo
+    "ME" => "Central & Eastern",    # Montenegro
+    "RS" => "Central & Eastern",    # Serbia
+    "MK" => "Central & Eastern"     # North Macedonia
