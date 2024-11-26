@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 06_tidy_ESS7.jl
+## Script name: 07_tidy_ESS7.jl
 ## Purpose: Clean ESS7 data
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-25
