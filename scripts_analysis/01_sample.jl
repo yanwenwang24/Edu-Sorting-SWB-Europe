@@ -35,6 +35,10 @@ sample = filter(
     ESS
 )
 
+sample = @chain sample begin
+    @transform(:cohabit = recode(:mstat, "cohabit" => 1, "married" => 0))
+end
+
 # 1.2 Non-missing values for key variable --------------------------------
 
 select!(
@@ -47,7 +51,7 @@ select!(
     :lsat,
     :female,
     :age,
-    :mstat,
+    :cohabit,
     :divorce,
     :immigrant,
     :minority,
