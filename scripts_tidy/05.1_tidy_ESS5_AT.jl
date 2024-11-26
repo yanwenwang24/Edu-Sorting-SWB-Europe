@@ -315,6 +315,7 @@ end
 select!(
     ESS5_AT,
     :pid,
+    :year,
     :essround,
     :cntry,
     :anweight,

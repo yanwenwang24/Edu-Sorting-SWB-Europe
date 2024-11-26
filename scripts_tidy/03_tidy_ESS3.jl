@@ -326,6 +326,7 @@ ESS3[!, :divorce] = divorce
 select!(
     ESS3,
     :pid,
+    :year,
     :essround,
     :cntry,
     :anweight,
