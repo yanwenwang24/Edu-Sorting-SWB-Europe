@@ -40,24 +40,6 @@ ESS = vcat(
 
 ESS = @chain ESS begin
     @transform(
-        :heter5 = [ismissing(r) || ismissing(s) ? missing : (r != s ? 1 : 0) for (r, s) in zip(:edu5_r, :edu5_s)],
-        :homo5 = [ismissing(r) || ismissing(s) ? missing : (r == s ? 1 : 0) for (r, s) in zip(:edu5_r, :edu5_s)],
-        :hyper5 = [ismissing(g) || ismissing(r) || ismissing(s) ? missing : (r > s && g == 0 ? 1 : 0) for (g, r, s) in zip(:female, :edu5_r, :edu5_s)],
-        :hypo5 = [ismissing(g) || ismissing(r) || ismissing(s) ? missing : (r > s && g == 1 ? 1 : 0) for (g, r, s) in zip(:female, :edu5_r, :edu5_s)]
-    )
-    @transform(
-        :heter4 = [ismissing(r) || ismissing(s) ? missing : (r != s ? 1 : 0) for (r, s) in zip(:edu4_r, :edu4_s)],
-        :homo4 = [ismissing(r) || ismissing(s) ? missing : (r == s ? 1 : 0) for (r, s) in zip(:edu4_r, :edu4_s)],
-        :hyper4 = [ismissing(g) || ismissing(r) || ismissing(s) ? missing : (r > s && g == 0 ? 1 : 0) for (g, r, s) in zip(:female, :edu4_r, :edu4_s)],
-        :hypo4 = [ismissing(g) || ismissing(r) || ismissing(s) ? missing : (r > s && g == 1 ? 1 : 0) for (g, r, s) in zip(:female, :edu4_r, :edu4_s)]
-    )
-    @transform(
-        :heter3 = [ismissing(r) || ismissing(s) ? missing : (r != s ? 1 : 0) for (r, s) in zip(:edu3_r, :edu3_s)],
-        :homo3 = [ismissing(r) || ismissing(s) ? missing : (r == s ? 1 : 0) for (r, s) in zip(:edu3_r, :edu3_s)],
-        :hyper3 = [ismissing(g) || ismissing(r) || ismissing(s) ? missing : (r > s && g == 0 ? 1 : 0) for (g, r, s) in zip(:female, :edu3_r, :edu3_s)],
-        :hypo3 = [ismissing(g) || ismissing(r) || ismissing(s) ? missing : (r > s && g == 1 ? 1 : 0) for (g, r, s) in zip(:female, :edu3_r, :edu3_s)]
-    )
-    @transform(
         :edu5_m = [ismissing(g) || ismissing(r) || ismissing(s) ? missing : (g == 0 ? r : s) for (g, r, s) in zip(:female, :edu5_r, :edu5_s)],
         :edu5_f = [ismissing(g) || ismissing(r) || ismissing(s) ? missing : (g == 1 ? r : s) for (g, r, s) in zip(:female, :edu5_r, :edu5_s)]
     )
@@ -68,6 +50,24 @@ ESS = @chain ESS begin
     @transform(
         :edu3_m = [ismissing(g) || ismissing(r) || ismissing(s) ? missing : (g == 0 ? r : s) for (g, r, s) in zip(:female, :edu3_r, :edu3_s)],
         :edu3_f = [ismissing(g) || ismissing(r) || ismissing(s) ? missing : (g == 1 ? r : s) for (g, r, s) in zip(:female, :edu3_r, :edu3_s)]
+    )
+    @transform(
+        :heter5 = [ismissing(m) || ismissing(f) ? missing : (m != f ? 1 : 0) for (m, f) in zip(:edu5_m, :edu5_f)],
+        :homo5 = [ismissing(m) || ismissing(f) ? missing : (m == f ? 1 : 0) for (m, f) in zip(:edu5_m, :edu5_f)],
+        :hyper5 = [ismissing(m) || ismissing(f) ? missing : (m > f ? 1 : 0) for (m, f) in zip(:edu5_m, :edu5_f)],
+        :hypo5 = [ismissing(m) || ismissing(f) ? missing : (m < f ? 1 : 0) for (m, f) in zip(:edu5_m, :edu5_f)]
+    )
+    @transform(
+        :heter4 = [ismissing(m) || ismissing(f) ? missing : (m != f ? 1 : 0) for (m, f) in zip(:edu4_m, :edu4_f)],
+        :homo4 = [ismissing(m) || ismissing(f) ? missing : (m == f ? 1 : 0) for (m, f) in zip(:edu4_m, :edu4_f)],
+        :hyper4 = [ismissing(m) || ismissing(f) ? missing : (m > f ? 1 : 0) for (m, f) in zip(:edu4_m, :edu4_f)],
+        :hypo4 = [ismissing(m) || ismissing(f) ? missing : (m < f ? 1 : 0) for (m, f) in zip(:edu4_m, :edu4_f)]
+    )
+    @transform(
+        :heter3 = [ismissing(m) || ismissing(f) ? missing : (m != f ? 1 : 0) for (m, f) in zip(:edu3_m, :edu3_f)],
+        :homo3 = [ismissing(m) || ismissing(f) ? missing : (m == f ? 1 : 0) for (m, f) in zip(:edu3_m, :edu3_f)],
+        :hyper3 = [ismissing(m) || ismissing(f) ? missing : (m > f ? 1 : 0) for (m, f) in zip(:edu3_m, :edu3_f)],
+        :hypo3 = [ismissing(m) || ismissing(f) ? missing : (m < f ? 1 : 0) for (m, f) in zip(:edu3_m, :edu3_f)]
     )
     @transform(
         :edu5_r = categorical(:edu5_r),
