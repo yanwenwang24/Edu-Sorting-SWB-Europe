@@ -273,6 +273,16 @@ ESS1 = @chain ESS1 begin
     )
     @transform(:pdjobev = recode(:pdjobev, 1 => 1, 2 => 0, missing => missing))
     @transform(:uempl = ifelse.(:uempla .== 1 .|| :uempli .== 1, 1, 0))
+    @transform(
+        :hincfel = recode(
+            :hincfel,
+            1 => 1,
+            2 => 0,
+            3 => 0,
+            4 => 0,
+            missing => missing
+        )
+    )
 end
 
 # Married vs. cohabiting vs. other
