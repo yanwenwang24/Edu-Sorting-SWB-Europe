@@ -22,7 +22,6 @@ using Distributions
 using FreqTables
 using MakieThemes
 using Random
-using RCall
 using Statistics
 using StatsBase
 
