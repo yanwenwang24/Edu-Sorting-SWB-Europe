@@ -90,7 +90,7 @@ ESS2_IT_child = @chain ESS2_IT_relations_long begin
 end
 
 ESS2_IT_child_under6 = @chain ESS2_IT_relations_long begin
-    @subset(:rship .== 2, :yrbrn .>= 2002 - 6)
+    @subset(:rship .== 2, :yrbrn .>= 2004 - 6)
     @groupby(:pid)
     @combine(:child_under6_count = length(:pid))
     @transform(:child_under6_count = ifelse.(:child_under6_count .>= 3, 3, :child_under6_count))
