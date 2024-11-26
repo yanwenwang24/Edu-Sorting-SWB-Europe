@@ -13,14 +13,22 @@
 ## ------------------------------------------------------------------------
 
 # Load the required packages
+using AlgebraOfGraphics
 using Arrow
+using CairoMakie
 using CategoricalArrays
 using DataFrames, DataFramesMeta
 using FreqTables
+using MakieThemes
 using Random
+using RCall
+using StatsBase
+
+set_theme!(theme_ggthemr(:fresh))
 
 # Load data
 ESS = DataFrame(Arrow.Table("Datasets_tidy/ESS.arrow"))
+sample = DataFrame(Arrow.Table("Datasets_tidy/sample.arrow"))
 
 # Load functions
 include("dictionaries.jl")
@@ -28,3 +36,4 @@ include("functions.jl")
 
 # Source scripts
 @time include("01_sample.jl")
+@time include("02_visualize.jl")
