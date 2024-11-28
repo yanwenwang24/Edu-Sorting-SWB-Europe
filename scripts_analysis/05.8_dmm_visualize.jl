@@ -14,9 +14,10 @@
 
 # Load data
 dmm_region_summary = DataFrame(Arrow.Table("Datasets_tidy/dmm_region_summary.arrow"))
+@transform!(dmm_region_summary, :se = 1.96 .* :se)
 
 # Plot
-f = Figure(; size=(1200, 800), fontsize=12)
+f = Figure(; size=(800, 800), fontsize=12)
 
 by_region = data(dmm_region_summary) * (
     mapping(
@@ -42,14 +43,14 @@ hlines = mapping(0) * visual(HLines, color=(:grey, 0.5), linestyle=:dash)
 
 plt = draw!(
     f[1, 1],
-    by_region + hlines_plt,
+    by_region + hlines,
     scales(
         DodgeX=(; width=0.5),
         Color=(; palette=["#fd7f6f", "#7eb0d5", "#b2e061"])
     )
 )
 
-legend!(f[:, 2], by_cohort_plt)
+legend!(f[:, 2], plt)
 
 f
 
