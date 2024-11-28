@@ -24,10 +24,6 @@ library(tidyverse)
 # Load data
 sample <- read_feather("Datasets_tidy/sample.arrow")
 
-# Standardize age and household size
-sample$age_scale <- scale(sample$age)
-sample$hhsize_scale <- scale(sample$hhsize)
-
 # Categorize education
 sample <- sample %>%
   mutate(
@@ -41,6 +37,12 @@ sample <- select(sample, -essround_10)
 # Stratify the sample by gender
 sample_men <- filter(sample, region == "Nordic", female == 0)
 sample_women <- filter(sample, region == "Nordic", female == 1)
+
+# Standardize age and household size
+sample_men$age_scale <- scale(sample_men$age)
+sample_women$age_scale <- scale(sample_women$age)
+sample_men$hhsize_scale <- scale(sample_men$hhsize)
+sample_women$hhsize_scale <- scale(sample_women$hhsize)
 
 # 2 Fomulas ---------------------------------------------------------------
 

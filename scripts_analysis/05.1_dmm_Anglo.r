@@ -24,10 +24,6 @@ library(tidyverse)
 # Load data
 sample <- read_feather("Datasets_tidy/sample.arrow")
 
-# Standardize age and household size
-sample$age_scale <- scale(sample$age)
-sample$hhsize_scale <- scale(sample$hhsize)
-
 # Categorize education
 sample <- sample %>%
   mutate(
@@ -42,6 +38,12 @@ sample <- select(sample, -essround_10)
 sample_men <- filter(sample, region == "Anglo-Saxon", female == 0)
 sample_women <- filter(sample, region == "Anglo-Saxon", female == 1)
 
+# Standardize age and household size
+sample_men$age_scale <- scale(sample_men$age)
+sample_women$age_scale <- scale(sample_women$age)
+sample_men$hhsize_scale <- scale(sample_men$hhsize)
+sample_women$hhsize_scale <- scale(sample_women$hhsize)
+
 # 2 Fomulas ---------------------------------------------------------------
 
 # Baseline
@@ -49,7 +51,7 @@ fmla_base <- as.formula(paste0(
   "lsat ~",
   "-1 + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
-  uempl + hincfel + ",
+  uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
   "cntry_IE",
@@ -62,7 +64,7 @@ fmla_heter <- as.formula(paste0(
   "lsat ~",
   "-1 + heter4 + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
-  uempl + hincfel + ",
+  uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
   "cntry_IE",
@@ -75,7 +77,7 @@ fmla_hyper <- as.formula(paste0(
   "lsat ~",
   "-1 + hyper4 + hypo4 + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
-  uempl + hincfel + ",
+  uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
   "cntry_IE",
