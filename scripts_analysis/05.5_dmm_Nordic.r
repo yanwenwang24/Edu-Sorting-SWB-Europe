@@ -51,10 +51,10 @@ fmla_base <- as.formula(paste0(
   "lsat ~",
   "-1 + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
-  uempl + hincfel + ",
+  uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_FI + cntry_IS + cntry_DE + cntry_NO + cntry_SE",
+  "cntry_FI + cntry_IS + cntry_NO + cntry_SE",
   " + ",
   "Dref(edu4_r, edu4_s)"
 ))
@@ -64,10 +64,10 @@ fmla_heter <- as.formula(paste0(
   "lsat ~",
   "-1 + heter4 + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
-  uempl + hincfel + ",
+  uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_FI + cntry_IS + cntry_DE + cntry_NO + cntry_SE",
+  "cntry_FI + cntry_IS + cntry_NO + cntry_SE",
   " + ",
   "Dref(edu4_r, edu4_s)"
 ))
@@ -77,10 +77,10 @@ fmla_hyper <- as.formula(paste0(
   "lsat ~",
   "-1 + hyper4 + hypo4 + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
-  uempl + hincfel + ",
+  uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_FI + cntry_IS + cntry_DE + cntry_NO + cntry_SE",
+  "cntry_FI + cntry_IS + cntry_NO + cntry_SE",
   " + ",
   "Dref(edu4_r, edu4_s)"
 ))
@@ -159,6 +159,7 @@ mod_heter_men <- gnm(
 
 summ(mod_heter_men, digits = 3)
 print(DrefWeights(mod_heter_men), digits = 3)
+lrtest(mod_heter_men, mod_base_men)
 
 # Women
 mod_heter_women <- gnm(
@@ -169,6 +170,7 @@ mod_heter_women <- gnm(
 
 summ(mod_heter_women, digits = 3)
 print(DrefWeights(mod_heter_women), digits = 3)
+lrtest(mod_heter_women, mod_base_women)
 
 # Compare men vs. women
 heter_men_df <- se(mod_heter_men) %>%
@@ -244,6 +246,7 @@ mod_hyper_men <- gnm(
 
 summ(mod_hyper_men, digits = 3)
 print(DrefWeights(mod_hyper_men), digits = 3)
+lrtest(mod_hyper_men, mod_base_men)
 
 # Women
 mod_hyper_women <- gnm(
@@ -254,6 +257,7 @@ mod_hyper_women <- gnm(
 
 summ(mod_hyper_women, digits = 3)
 print(DrefWeights(mod_hyper_women), digits = 3)
+lrtest(mod_hyper_women, mod_base_women)
 
 # Compare men vs. women
 hyper_men_df <- se(mod_hyper_men) %>%
