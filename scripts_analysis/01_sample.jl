@@ -76,7 +76,7 @@ dropmissing!(sample)
 
 # 1.3 Exclude certain countries -----------------------------------------
 
-countries_to_exclude = ["IL"]
+countries_to_exclude = ["IL"] # Israel
 sample = filter(row -> !(row[:cntry] in countries_to_exclude), sample)
 
 # Spread country and essround columns to dummy variables
