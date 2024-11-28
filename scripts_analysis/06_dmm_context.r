@@ -42,6 +42,12 @@ sample <- select(sample, -essround_10, -cntry_AT)
 sample_men <- filter(sample, female == 0)
 sample_women <- filter(sample, female == 1)
 
+# Standardize age and household size
+sample_men$age_scale <- scale(sample_men$age)
+sample_women$age_scale <- scale(sample_women$age)
+sample_men$hhsize_scale <- scale(sample_men$hhsize)
+sample_women$hhsize_scale <- scale(sample_women$hhsize)
+
 # 2 Fomulas ---------------------------------------------------------------
 
 # Baseline
@@ -70,7 +76,7 @@ fmla_heter <- as.formula(paste0(
 
 fmla_heter_inter <- as.formula(paste0(
   "lsat ~",
-  "-1 + heter4*homo4_index + heter*hyper4_index + age_scale + 
+  "-1 + heter4*homo4_index + heter4*hyper4_index + age_scale + 
   cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + hincfel + ",
@@ -200,6 +206,7 @@ mod_heter_inter_men <- gnm(
 
 summ(mod_heter_inter_men, digits = 3)
 print(DrefWeights(mod_heter_inter_men), digits = 3)
+lrtest(mod_heter_inter_men, mod_heter_men)
 
 # Women
 mod_heter_inter_women <- gnm(
@@ -210,6 +217,7 @@ mod_heter_inter_women <- gnm(
 
 summ(mod_heter_inter_women, digits = 3)
 print(DrefWeights(mod_heter_inter_women), digits = 3)
+lrtest(mod_heter_inter_women, mod_heter_women)
 
 # Compare men vs. women
 heter_inter_men_df <- se(mod_heter_inter_men) %>%
@@ -320,6 +328,7 @@ mod_hyper_inter_men <- gnm(
 
 summ(mod_hyper_inter_men, digits = 3)
 print(DrefWeights(mod_hyper_inter_men), digits = 3)
+lrtest(mod_hyper_inter_men, mod_hyper_men)
 
 # Women
 mod_hyper_inter_women <- gnm(
@@ -330,6 +339,7 @@ mod_hyper_inter_women <- gnm(
 
 summ(mod_hyper_inter_women, digits = 3)
 print(DrefWeights(mod_hyper_inter_women), digits = 3)
+lrtest(mod_hyper_inter_women, mod_hyper_women)
 
 # Compare men vs. women
 hyper_inter_men_df <- se(mod_hyper_inter_men) %>%
