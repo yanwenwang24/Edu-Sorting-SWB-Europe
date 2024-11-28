@@ -159,6 +159,7 @@ mod_heter_men <- gnm(
 
 summ(mod_heter_men, digits = 3)
 print(DrefWeights(mod_heter_men), digits = 3)
+lrtest(mod_heter_men, mod_base_men)
 
 # Women
 mod_heter_women <- gnm(
@@ -169,6 +170,7 @@ mod_heter_women <- gnm(
 
 summ(mod_heter_women, digits = 3)
 print(DrefWeights(mod_heter_women), digits = 3)
+lrtest(mod_heter_women, mod_base_women)
 
 # Compare men vs. women
 heter_men_df <- se(mod_heter_men) %>%
@@ -218,6 +220,7 @@ mod_hyper_men <- gnm(
 
 summ(mod_hyper_men, digits = 3)
 print(DrefWeights(mod_hyper_men), digits = 3)
+lrtest(mod_hyper_men, mod_base_men)
 
 # Women
 mod_hyper_women <- gnm(
@@ -228,6 +231,7 @@ mod_hyper_women <- gnm(
 
 summ(mod_hyper_women, digits = 3)
 print(DrefWeights(mod_hyper_women), digits = 3)
+lrtest(mod_hyper_women, mod_base_women)
 
 # Compare men vs. women
 hyper_men_df <- se(mod_hyper_men) %>%
