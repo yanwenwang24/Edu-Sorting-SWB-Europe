@@ -63,8 +63,6 @@ fmla_heter <- as.formula(paste0(
   "-1 + heter4 + homo4_index + hyper4_index + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + hincfel + ",
-  paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
-  " + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
   "Dref(edu4_r, edu4_s)"
@@ -76,8 +74,6 @@ fmla_heter_inter <- as.formula(paste0(
   cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + hincfel + ",
-  paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
-  " + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
   "Dref(edu4_r, edu4_s)"
@@ -90,8 +86,6 @@ fmla_hyper <- as.formula(paste0(
   cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + hincfel + ",
-  paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
-  " + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
   "Dref(edu4_r, edu4_s)"
@@ -103,8 +97,6 @@ fmla_hyper_inter <- as.formula(paste0(
   hypo4*homo4_index + hypo4*hyper4_index + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + hincfel + ",
-  paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
-  " + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
   "Dref(edu4_r, edu4_s)"
