@@ -211,6 +211,32 @@ left_join(
   ) %>%
   select(rowname, z, p, star)
 
+# Get coefficients
+sum_heter_men <- summary(mod_heter_men)
+sum_heter_women <- summary(mod_heter_women)
+
+region_central_heter_men <- sum_heter_men$coefficients %>%
+  as.data.frame() %>%
+  filter(row_number() == 1) %>%
+  mutate(Df = summary(mod_heter_men)$df[2]) %>%
+  rownames_to_column() %>%
+  rename(pattern = rowname) %>%
+  mutate(gender = "men")
+
+region_central_heter_women <- sum_heter_women$coefficients %>%
+  as.data.frame() %>%
+  filter(row_number() == 1) %>%
+  mutate(Df = summary(mod_heter_women)$df[2]) %>%
+  rownames_to_column() %>%
+  rename(pattern = rowname) %>%
+  mutate(gender = "women")
+
+region_central_heter <- bind_rows(
+  region_central_heter_men,
+  region_central_heter_women
+) %>%
+  mutate(region = "Central & Eastern")
+
 # 3.3 Hypergamy and hypogamy --------------------------------------------
 
 # Men
@@ -269,3 +295,34 @@ left_join(
     )
   ) %>%
   select(rowname, z, p, star)
+
+# Get coefficients
+sum_hyper_men <- summary(mod_hyper_men)
+sum_hyper_women <- summary(mod_hyper_women)
+
+region_central_hyper_men <- sum_hyper_men$coefficients %>%
+  as.data.frame() %>%
+  filter(row_number() == 1 | row_number() == 2) %>%
+  mutate(Df = summary(mod_hyper_men)$df[2]) %>%
+  rownames_to_column() %>%
+  rename(pattern = rowname) %>%
+  mutate(gender = "men")
+
+region_central_hyper_women <- sum_hyper_women$coefficients %>%
+  as.data.frame() %>%
+  filter(row_number() == 1 | row_number() == 2) %>%
+  mutate(Df = summary(mod_hyper_women)$df[2]) %>%
+  rownames_to_column() %>%
+  rename(pattern = rowname) %>%
+  mutate(gender = "women")
+
+region_central_hyper <- bind_rows(
+  region_central_hyper_men,
+  region_central_hyper_women
+) %>%
+  mutate(region = "Central & Eastern")
+
+region_central <- bind_rows(
+  region_central_heter,
+  region_central_hyper
+)
