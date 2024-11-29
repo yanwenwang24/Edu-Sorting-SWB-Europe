@@ -38,7 +38,7 @@ analyze_variables(
         :hincfel
         ],
     weights=:anweight
-)
+) |> println
 
 # Men
 analyze_variables(
@@ -58,7 +58,7 @@ analyze_variables(
         :hincfel
         ],
     weights=:anweight
-)
+) |> println
 
 # Women
 analyze_variables(
@@ -78,7 +78,7 @@ analyze_variables(
         :hincfel
         ],
     weights=:anweight
-)
+) |> println
 
 # 1.2 Categorical variables ------------------------------------------------
 
