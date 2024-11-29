@@ -54,7 +54,7 @@ fmla_base <- as.formula(paste0(
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_GR + cntry_IT + cntry_PT + cntry_ES + cntry_TR",
+  "cntry_GR + cntry_IT + cntry_PT + cntry_CY",
   " + ",
   "Dref(edu4_r, edu4_s)"
 ))
@@ -67,7 +67,7 @@ fmla_heter <- as.formula(paste0(
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_GR + cntry_IT + cntry_PT + cntry_ES + cntry_TR",
+  "cntry_GR + cntry_IT + cntry_PT + cntry_CY",
   " + ",
   "Dref(edu4_r, edu4_s)"
 ))
@@ -80,7 +80,7 @@ fmla_hyper <- as.formula(paste0(
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_GR + cntry_IT + cntry_PT + cntry_ES + cntry_TR",
+  "cntry_GR + cntry_IT + cntry_PT + cntry_CY",
   " + ",
   "Dref(edu4_r, edu4_s)"
 ))

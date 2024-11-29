@@ -76,8 +76,16 @@ dropmissing!(sample)
 
 # 1.3 Exclude certain countries -----------------------------------------
 
-countries_to_exclude = ["IL"] # Israel
-sample = filter(row -> !(row[:cntry] in countries_to_exclude), sample)
+cntry_to_keep = @chain sample begin
+    @select(:cntry, :essround)
+    unique
+    @groupby(:cntry)
+    @combine(:n = length(:cntry))
+    @subset(:n .>= 3)
+end
+
+sample = filter(row -> (row[:cntry] in cntry_to_keep.cntry), sample)
+sample = filter(row -> !(row[:cntry] in ["IL"]), sample)
 
 # Spread country and essround columns to dummy variables
 sample = spread_to_dummies(sample, :cntry)
