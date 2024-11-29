@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 07_dmm_married.r
+## Script name: 07.1_dmm_married.r
 ## Purpose: Fit diagonal mobiliy models for married individuals only
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27
