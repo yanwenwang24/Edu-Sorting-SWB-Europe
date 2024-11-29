@@ -54,7 +54,7 @@ fmla_hyper <- as.formula(paste0(
   "lsat ~",
   "-1 + hyper4 + hypo4 + age_scale + cohabit +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
-  uempl + hincfel + ",
+  uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
@@ -67,7 +67,7 @@ fmla_hyper_inter <- as.formula(paste0(
   "-1 + hyper4*homo4_index + hyper4*hyper4_index + 
   hypo4*homo4_index + hypo4*hyper4_index + age_scale + cohabit +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
-  uempl + hincfel + ",
+  uempl + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
   "Dref(edu4_r, edu4_s)"
