@@ -170,7 +170,6 @@ weighted_ttest(
 prop(freqtable(sample, :edu4_m, :edu4_f, weights=sample.anweight), margins=1)
 
 # 3 Sample size by country -------------------------------------------
-
 cntry_df = @chain sample begin
     @select(:cntry, :region)
     unique
