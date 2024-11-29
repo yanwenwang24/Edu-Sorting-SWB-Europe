@@ -194,4 +194,6 @@ end
 
 cntry_df[!, :rounds] = rounds
 
-cntry_df
+sort!(cntry_df, :region)
+
+println(cntry_df)
