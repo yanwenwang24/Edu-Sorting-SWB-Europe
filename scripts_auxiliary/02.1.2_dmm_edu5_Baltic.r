@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.2.2_dmm_edu5_Baltic.r
+## Script name: 02.1.2_dmm_edu5_Baltic.r
 ## Purpose: Fit diagonal mobiliy models in Baltic region
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-26

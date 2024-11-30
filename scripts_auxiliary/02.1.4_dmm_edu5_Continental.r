@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.2.4_dmm_edu5_Continental.r
+## Script name: 02.1.4_dmm_edu5_Continental.r
 ## Purpose: Fit diagonal mobiliy models in Continental Europe
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27

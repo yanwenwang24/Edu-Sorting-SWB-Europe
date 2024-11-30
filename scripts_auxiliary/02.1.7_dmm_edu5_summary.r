@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.2.7_dmm_edu5_summary.r
+## Script name: 02.1.7_dmm_edu5_summary.r
 ## Purpose: Store coefficients and standard errors
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27

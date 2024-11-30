@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.2.5_dmm_edu5_Nordic.r
+## Script name: 02.1.5_dmm_edu5_Nordic.r
 ## Purpose: Fit diagonal mobiliy models in Nordic countries
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27

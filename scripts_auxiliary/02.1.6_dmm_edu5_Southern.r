@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.2.6_dmm_edu5_Southern.r
+## Script name: 02.1.6_dmm_edu5_Southern.r
 ## Purpose: Fit diagonal mobiliy models in Southern countries
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27

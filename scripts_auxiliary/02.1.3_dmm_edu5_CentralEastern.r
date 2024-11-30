@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.2.3_dmm_edu5_CentralEastern.r
+## Script name: 02.1.3_dmm_edu5_CentralEastern.r
 ## Purpose: Fit diagonal mobiliy models in Central & Eastern Europe
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27
