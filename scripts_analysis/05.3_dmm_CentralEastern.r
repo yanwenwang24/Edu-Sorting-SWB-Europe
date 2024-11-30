@@ -27,8 +27,8 @@ sample <- read_feather("Datasets_tidy/sample.arrow")
 # Categorize education
 sample <- sample %>%
   mutate(
-    edu4_r = factor(edu4_r),
-    edu4_s = factor(edu4_s)
+    edu5_r = factor(edu5_r),
+    edu5_s = factor(edu5_s)
   )
 
 # Remove one round (for dummy variable trap)
@@ -57,13 +57,13 @@ fmla_base <- as.formula(paste0(
   "cntry_CZ + cntry_HU + cntry_PL + cntry_SI + 
   cntry_SK + cntry_UA + cntry_BG + cntry_RU",
   " + ",
-  "Dref(edu4_r, edu4_s)"
+  "Dref(edu5_r, edu5_s)"
 ))
 
 # Heterogamy
 fmla_heter <- as.formula(paste0(
   "lsat ~",
-  "-1 + heter4 + age_scale + cohabit + divorce +
+  "-1 + heter5 + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
@@ -71,13 +71,13 @@ fmla_heter <- as.formula(paste0(
   "cntry_CZ + cntry_HU + cntry_PL + cntry_SI + 
   cntry_SK + cntry_UA + cntry_BG + cntry_RU",
   " + ",
-  "Dref(edu4_r, edu4_s)"
+  "Dref(edu5_r, edu5_s)"
 ))
 
 # Hypergamy and hypogamy
 fmla_hyper <- as.formula(paste0(
   "lsat ~",
-  "-1 + hyper4 + hypo4 + age_scale + cohabit + divorce +
+  "-1 + hyper5 + hypo5 + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
@@ -85,7 +85,7 @@ fmla_hyper <- as.formula(paste0(
   "cntry_CZ + cntry_HU + cntry_PL + cntry_SI + 
   cntry_SK + cntry_UA + cntry_BG + cntry_RU",
   " + ",
-  "Dref(edu4_r, edu4_s)"
+  "Dref(edu5_r, edu5_s)"
 ))
 
 # 3 Fit models -----------------------------------------------------------

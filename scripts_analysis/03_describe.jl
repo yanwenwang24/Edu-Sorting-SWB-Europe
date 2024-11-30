@@ -82,9 +82,9 @@ analyze_variables(
 
 # 1.2 Categorical variables ------------------------------------------------
 
-prop(freqtable(sample, :edu4_r, weights=sample.anweight))
-prop(freqtable(sample_men, :edu4_r, weights=sample_men.anweight))
-prop(freqtable(sample_women, :edu4_r, weights=sample_women.anweight))
+prop(freqtable(sample, :edu5_r, weights=sample.anweight))
+prop(freqtable(sample_men, :edu5_r, weights=sample_men.anweight))
+prop(freqtable(sample_women, :edu5_r, weights=sample_women.anweight))
 
 # 1.3 T-tests --------------------------------------------------------------
 
@@ -167,7 +167,7 @@ weighted_ttest(
 
 # 2 Cross-tabulation ------------------------------------------------
 
-prop(freqtable(sample, :edu4_m, :edu4_f, weights=sample.anweight), margins=1)
+prop(freqtable(sample, :edu5_m, :edu5_f, weights=sample.anweight), margins=1)
 
 # 3 Sample size by country -------------------------------------------
 cntry_df = @chain sample begin

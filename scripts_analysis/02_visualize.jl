@@ -17,9 +17,9 @@ trends_cohort = @chain sample begin
     @transform(:birthy = :year - :age)
     @groupby(:birthy)
     @combine(
-        :Homogamy = mean(:homo4),
-        :Hypergamy = mean(:hyper4),
-        :Hypogamy = mean(:hypo4)
+        :Homogamy = mean(:homo5),
+        :Hypergamy = mean(:hyper5),
+        :Hypogamy = mean(:hypo5)
     )
 end
 
@@ -35,9 +35,9 @@ trends_cohort_region = @chain sample begin
     @transform(:birthy = :year - :age)
     @groupby(:birthy, :region)
     @combine(
-        :Homogamy = mean(:homo4),
-        :Hypergamy = mean(:hyper4),
-        :Hypogamy = mean(:hypo4)
+        :Homogamy = mean(:homo5),
+        :Hypergamy = mean(:hyper5),
+        :Hypogamy = mean(:hypo5)
     )
 end
 
