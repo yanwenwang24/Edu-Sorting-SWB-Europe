@@ -1,9 +1,9 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.1.1_dmm_edu5_Anglo.r
-## Purpose: Fit diagonal mobiliy models in Anglo-Saxon region
+## Script name: 02.1.6_dmm_edu4_Southern.r
+## Purpose: Fit diagonal mobiliy models in Southern countries
 ## Author: Yanwen Wang
-## Date Created: 2024-11-26
+## Date Created: 2024-11-27
 ## Email: yanwenwang@u.nus.edu
 ##
 ## ------------------------------------------------------------------------
@@ -27,16 +27,16 @@ sample <- read_feather("Datasets_tidy/sample.arrow")
 # Categorize education
 sample <- sample %>%
   mutate(
-    edu5_r = factor(edu5_r),
-    edu5_s = factor(edu5_s)
+    edu4_r = factor(edu4_r),
+    edu4_s = factor(edu4_s)
   )
 
 # Remove one round (for dummy variable trap)
 sample <- select(sample, -essround_10)
 
 # Stratify the sample by gender
-sample_men <- filter(sample, region == "Anglo-Saxon", female == 0)
-sample_women <- filter(sample, region == "Anglo-Saxon", female == 1)
+sample_men <- filter(sample, region == "Southern", female == 0)
+sample_women <- filter(sample, region == "Southern", female == 1)
 
 # Standardize age and household size
 sample_men$age_scale <- scale(sample_men$age)
@@ -54,35 +54,35 @@ fmla_base <- as.formula(paste0(
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_IE",
+  "cntry_GR + cntry_IT + cntry_PT + cntry_CY",
   " + ",
-  "Dref(edu5_r, edu5_s)"
+  "Dref(edu4_r, edu4_s)"
 ))
 
 # Heterogamy
 fmla_heter <- as.formula(paste0(
   "lsat ~",
-  "-1 + heter5 + age_scale + cohabit + divorce +
+  "-1 + heter4 + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_IE",
+  "cntry_GR + cntry_IT + cntry_PT + cntry_CY",
   " + ",
-  "Dref(edu5_r, edu5_s)"
+  "Dref(edu4_r, edu4_s)"
 ))
 
 # Hypergamy and hypogamy
 fmla_hyper <- as.formula(paste0(
   "lsat ~",
-  "-1 + hyper5 + hypo5 + age_scale + cohabit + divorce +
+  "-1 + hyper4 + hypo4 + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_IE",
+  "cntry_GR + cntry_IT + cntry_PT + cntry_CY",
   " + ",
-  "Dref(edu5_r, edu5_s)"
+  "Dref(edu4_r, edu4_s)"
 ))
 
 # 3 Fit models -----------------------------------------------------------
@@ -213,7 +213,7 @@ left_join(
 sum_heter_men <- summary(mod_heter_men)
 sum_heter_women <- summary(mod_heter_women)
 
-region_anglo_heter_men <- sum_heter_men$coefficients %>%
+region_southern_heter_men <- sum_heter_men$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1) %>%
   mutate(Df = summary(mod_heter_men)$df[2]) %>%
@@ -221,7 +221,7 @@ region_anglo_heter_men <- sum_heter_men$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "men")
 
-region_anglo_heter_women <- sum_heter_women$coefficients %>%
+region_southern_heter_women <- sum_heter_women$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1) %>%
   mutate(Df = summary(mod_heter_women)$df[2]) %>%
@@ -229,11 +229,11 @@ region_anglo_heter_women <- sum_heter_women$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "women")
 
-region_anglo_heter <- bind_rows(
-  region_anglo_heter_men,
-  region_anglo_heter_women
+region_southern_heter <- bind_rows(
+  region_southern_heter_men,
+  region_southern_heter_women
 ) %>%
-  mutate(region = "Anglo-Saxon")
+  mutate(region = "Southern")
 
 # 3.3 Hypergamy and hypogamy --------------------------------------------
 
@@ -300,7 +300,7 @@ left_join(
 sum_hyper_men <- summary(mod_hyper_men)
 sum_hyper_women <- summary(mod_hyper_women)
 
-region_anglo_hyper_men <- sum_hyper_men$coefficients %>%
+region_southern_hyper_men <- sum_hyper_men$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1 | row_number() == 2) %>%
   mutate(Df = summary(mod_hyper_men)$df[2]) %>%
@@ -308,7 +308,7 @@ region_anglo_hyper_men <- sum_hyper_men$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "men")
 
-region_anglo_hyper_women <- sum_hyper_women$coefficients %>%
+region_southern_hyper_women <- sum_hyper_women$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1 | row_number() == 2) %>%
   mutate(Df = summary(mod_hyper_women)$df[2]) %>%
@@ -316,13 +316,13 @@ region_anglo_hyper_women <- sum_hyper_women$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "women")
 
-region_anglo_hyper <- bind_rows(
-  region_anglo_hyper_men,
-  region_anglo_hyper_women
+region_southern_hyper <- bind_rows(
+  region_southern_hyper_men,
+  region_southern_hyper_women
 ) %>%
-  mutate(region = "Anglo-Saxon")
+  mutate(region = "Southern")
 
-region_anglo <- bind_rows(
-  region_anglo_heter,
-  region_anglo_hyper
+region_southern <- bind_rows(
+  region_southern_heter,
+  region_southern_hyper
 )
