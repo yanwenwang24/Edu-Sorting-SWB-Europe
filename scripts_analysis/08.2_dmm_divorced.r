@@ -27,8 +27,8 @@ sample <- read_feather("Datasets_tidy/sample.arrow")
 # Categorize education
 sample <- sample %>%
   mutate(
-    edu5_r = factor(edu5_r),
-    edu5_s = factor(edu5_s)
+    edu4_r = factor(edu4_r),
+    edu4_s = factor(edu4_s)
   )
 
 # Select married individuals
@@ -52,25 +52,25 @@ sample_women$hhsize_scale <- scale(sample_women$hhsize)
 # Hypergamy and hypogamy
 fmla_hyper <- as.formula(paste0(
   "lsat ~",
-  "-1 + hyper5 + hypo5 + age_scale + cohabit +
+  "-1 + hyper4 + hypo4 + age_scale + cohabit +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "Dref(edu5_r, edu5_s)"
+  "Dref(edu4_r, edu4_s)"
 ))
 
 fmla_hyper_inter <- as.formula(paste0(
   "lsat ~",
-  "-1 + hyper5*homo5_index + hyper5*hyper5_index + 
-  hypo5*homo5_index + hypo5*hyper5_index + age_scale + cohabit +
+  "-1 + hyper4*homo4_index + hyper4*hyper4_index + 
+  hypo4*homo4_index + hypo4*hyper4_index + age_scale + cohabit +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "Dref(edu5_r, edu5_s)"
+  "Dref(edu4_r, edu4_s)"
 ))
 
 # 3 Fit models -----------------------------------------------------------

@@ -32,9 +32,9 @@ dmm_region_summary <- bind_rows(
   ) %>%
   mutate(
     pattern = case_when(
-      pattern == "heter5" ~ "Heterogamy",
-      pattern == "hyper5" ~ "Hypergamy",
-      pattern == "hypo5" ~ "Hypogamy"
+      pattern == "heter4" ~ "Heterogamy",
+      pattern == "hyper4" ~ "Hypergamy",
+      pattern == "hypo4" ~ "Hypogamy"
     )
   )
 

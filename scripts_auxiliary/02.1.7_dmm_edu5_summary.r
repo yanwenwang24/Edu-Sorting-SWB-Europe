@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.1.7_dmm_edu4_summary.r
+## Script name: 02.1.7_dmm_edu5_summary.r
 ## Purpose: Store coefficients and standard errors
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27
@@ -12,7 +12,7 @@
 
 ## ------------------------------------------------------------------------
 
-dmm_region_edu4_summary <- bind_rows(
+dmm_region_edu5_summary <- bind_rows(
   region_anglo,
   region_baltic,
   region_central,
@@ -32,14 +32,14 @@ dmm_region_edu4_summary <- bind_rows(
   ) %>%
   mutate(
     pattern = case_when(
-      pattern == "heter4" ~ "Heterogamy",
-      pattern == "hyper4" ~ "Hypergamy",
-      pattern == "hypo4" ~ "Hypogamy"
+      pattern == "heter5" ~ "Heterogamy",
+      pattern == "hyper5" ~ "Hypergamy",
+      pattern == "hypo5" ~ "Hypogamy"
     )
   )
 
 # Save to arrow
 write_feather(
   dmm_region_edu4_summary,
-  "Datasets_tidy/dmm_region_edu4_summary.arrow"
+  "Datasets_tidy/dmm_region_edu5_summary.arrow"
 )
