@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.2_dmm_context_edu3.r
+## Script name: 03.1_dmm_context_edu5.r
 ## Purpose: Fit diagonal mobiliy models with H-index interaction terms
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27
@@ -31,8 +31,8 @@ sample$hhsize_scale <- scale(sample$hhsize)
 # Categorize education
 sample <- sample %>%
   mutate(
-    edu3_r = factor(edu3_r),
-    edu3_s = factor(edu3_s)
+    edu5_r = factor(edu5_r),
+    edu5_s = factor(edu5_s)
   )
 
 # Remove one country and one round (for dummy variable trap)
@@ -60,52 +60,52 @@ fmla_base <- as.formula(paste0(
   " + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "Dref(edu3_r, edu3_s)"
+  "Dref(edu5_r, edu5_s)"
 ))
 
 # Heterogamy
 fmla_heter <- as.formula(paste0(
   "lsat ~",
-  "-1 + heter3 + homo3_index + hyper3_index + age_scale + cohabit + divorce +
+  "-1 + heter5 + homo5_index + hyper5_index + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + hincfel + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "Dref(edu3_r, edu3_s)"
+  "Dref(edu5_r, edu5_s)"
 ))
 
 fmla_heter_inter <- as.formula(paste0(
   "lsat ~",
-  "-1 + heter3*homo3_index + heter3*hyper3_index + age_scale + 
+  "-1 + heter5*homo5_index + heter5*hyper5_index + age_scale + 
   cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + hincfel + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "Dref(edu3_r, edu3_s)"
+  "Dref(edu5_r, edu5_s)"
 ))
 
 # Hypergamy and hypogamy
 fmla_hyper <- as.formula(paste0(
   "lsat ~",
-  "-1 + hyper3 + hypo3 + homo3_index + hyper3_index + age_scale + 
+  "-1 + hyper5 + hypo5 + homo5_index + hyper5_index + age_scale + 
   cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + hincfel + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "Dref(edu3_r, edu3_s)"
+  "Dref(edu5_r, edu5_s)"
 ))
 
 fmla_hyper_inter <- as.formula(paste0(
   "lsat ~",
-  "-1 + hyper3*homo3_index + hyper3*hyper3_index + 
-  hypo3*homo3_index + hypo3*hyper3_index + age_scale + cohabit + divorce +
+  "-1 + hyper5*homo5_index + hyper5*hyper5_index + 
+  hypo5*homo5_index + hypo5*hyper5_index + age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + hincfel + ",
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "Dref(edu3_r, edu3_s)"
+  "Dref(edu5_r, edu5_s)"
 ))
 
 # 3 Fit models -----------------------------------------------------------
