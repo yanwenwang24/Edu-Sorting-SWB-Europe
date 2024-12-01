@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.2.8_dmm_edu5_visualize.jl
+## Script name: 02.1.8_dmm_edu5_visualize.jl
 ## Purpose: Visualize model coefficients by region
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27

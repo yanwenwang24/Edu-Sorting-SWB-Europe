@@ -1,7 +1,7 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.2.3_dmm_edu5_CentralEastern.r
-## Purpose: Fit diagonal mobiliy models in Central & Eastern Europe
+## Script name: 02.1.5_dmm_edu5_Nordic.r
+## Purpose: Fit diagonal mobiliy models in Nordic countries
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27
 ## Email: yanwenwang@u.nus.edu
@@ -35,8 +35,8 @@ sample <- sample %>%
 sample <- select(sample, -essround_10)
 
 # Stratify the sample by gender
-sample_men <- filter(sample, region == "Central & Eastern", female == 0)
-sample_women <- filter(sample, region == "Central & Eastern", female == 1)
+sample_men <- filter(sample, region == "Nordic", female == 0)
+sample_women <- filter(sample, region == "Nordic", female == 1)
 
 # Standardize age and household size
 sample_men$age_scale <- scale(sample_men$age)
@@ -54,8 +54,7 @@ fmla_base <- as.formula(paste0(
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_CZ + cntry_HU + cntry_PL + cntry_SI + 
-  cntry_SK + cntry_UA + cntry_BG + cntry_RU",
+  "cntry_FI + cntry_NO + cntry_IS + cntry_SE",
   " + ",
   "Dref(edu5_r, edu5_s)"
 ))
@@ -68,8 +67,7 @@ fmla_heter <- as.formula(paste0(
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_CZ + cntry_HU + cntry_PL + cntry_SI + 
-  cntry_SK + cntry_UA + cntry_BG + cntry_RU",
+  "cntry_FI + cntry_NO + cntry_IS + cntry_SE",
   " + ",
   "Dref(edu5_r, edu5_s)"
 ))
@@ -82,8 +80,7 @@ fmla_hyper <- as.formula(paste0(
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_CZ + cntry_HU + cntry_PL + cntry_SI + 
-  cntry_SK + cntry_UA + cntry_BG + cntry_RU",
+  "cntry_FI + cntry_NO + cntry_IS + cntry_SE",
   " + ",
   "Dref(edu5_r, edu5_s)"
 ))
@@ -216,7 +213,7 @@ left_join(
 sum_heter_men <- summary(mod_heter_men)
 sum_heter_women <- summary(mod_heter_women)
 
-region_central_heter_men <- sum_heter_men$coefficients %>%
+region_nordic_heter_men <- sum_heter_men$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1) %>%
   mutate(Df = summary(mod_heter_men)$df[2]) %>%
@@ -224,7 +221,7 @@ region_central_heter_men <- sum_heter_men$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "men")
 
-region_central_heter_women <- sum_heter_women$coefficients %>%
+region_nordic_heter_women <- sum_heter_women$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1) %>%
   mutate(Df = summary(mod_heter_women)$df[2]) %>%
@@ -232,11 +229,11 @@ region_central_heter_women <- sum_heter_women$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "women")
 
-region_central_heter <- bind_rows(
-  region_central_heter_men,
-  region_central_heter_women
+region_nordic_heter <- bind_rows(
+  region_nordic_heter_men,
+  region_nordic_heter_women
 ) %>%
-  mutate(region = "Central & Eastern")
+  mutate(region = "Nordic")
 
 # 3.3 Hypergamy and hypogamy --------------------------------------------
 
@@ -303,7 +300,7 @@ left_join(
 sum_hyper_men <- summary(mod_hyper_men)
 sum_hyper_women <- summary(mod_hyper_women)
 
-region_central_hyper_men <- sum_hyper_men$coefficients %>%
+region_nordic_hyper_men <- sum_hyper_men$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1 | row_number() == 2) %>%
   mutate(Df = summary(mod_hyper_men)$df[2]) %>%
@@ -311,7 +308,7 @@ region_central_hyper_men <- sum_hyper_men$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "men")
 
-region_central_hyper_women <- sum_hyper_women$coefficients %>%
+region_nordic_hyper_women <- sum_hyper_women$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1 | row_number() == 2) %>%
   mutate(Df = summary(mod_hyper_women)$df[2]) %>%
@@ -319,13 +316,13 @@ region_central_hyper_women <- sum_hyper_women$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "women")
 
-region_central_hyper <- bind_rows(
-  region_central_hyper_men,
-  region_central_hyper_women
+region_nordic_hyper <- bind_rows(
+  region_nordic_hyper_men,
+  region_nordic_hyper_women
 ) %>%
-  mutate(region = "Central & Eastern")
+  mutate(region = "Nordic")
 
-region_central <- bind_rows(
-  region_central_heter,
-  region_central_hyper
+region_nordic <- bind_rows(
+  region_nordic_heter,
+  region_nordic_hyper
 )

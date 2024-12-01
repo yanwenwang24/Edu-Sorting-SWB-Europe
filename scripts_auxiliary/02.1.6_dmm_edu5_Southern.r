@@ -1,7 +1,7 @@
 ## ------------------------------------------------------------------------
 ##
-## Script name: 02.2.4_dmm_edu5_Continental.r
-## Purpose: Fit diagonal mobiliy models in Continental Europe
+## Script name: 02.1.6_dmm_edu5_Southern.r
+## Purpose: Fit diagonal mobiliy models in Southern countries
 ## Author: Yanwen Wang
 ## Date Created: 2024-11-27
 ## Email: yanwenwang@u.nus.edu
@@ -35,8 +35,8 @@ sample <- sample %>%
 sample <- select(sample, -essround_10)
 
 # Stratify the sample by gender
-sample_men <- filter(sample, region == "Continental", female == 0)
-sample_women <- filter(sample, region == "Continental", female == 1)
+sample_men <- filter(sample, region == "Southern", female == 0)
+sample_women <- filter(sample, region == "Southern", female == 1)
 
 # Standardize age and household size
 sample_men$age_scale <- scale(sample_men$age)
@@ -54,7 +54,7 @@ fmla_base <- as.formula(paste0(
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_BE + cntry_CH + cntry_DE + cntry_NL + cntry_FR",
+  "cntry_GR + cntry_IT + cntry_PT + cntry_CY",
   " + ",
   "Dref(edu5_r, edu5_s)"
 ))
@@ -67,7 +67,7 @@ fmla_heter <- as.formula(paste0(
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_BE + cntry_CH + cntry_DE + cntry_NL + cntry_FR",
+  "cntry_GR + cntry_IT + cntry_PT + cntry_CY",
   " + ",
   "Dref(edu5_r, edu5_s)"
 ))
@@ -80,7 +80,7 @@ fmla_hyper <- as.formula(paste0(
   uempl + ",
   paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
   " + ",
-  "cntry_BE + cntry_CH + cntry_DE + cntry_NL + cntry_FR",
+  "cntry_GR + cntry_IT + cntry_PT + cntry_CY",
   " + ",
   "Dref(edu5_r, edu5_s)"
 ))
@@ -213,7 +213,7 @@ left_join(
 sum_heter_men <- summary(mod_heter_men)
 sum_heter_women <- summary(mod_heter_women)
 
-region_continental_heter_men <- sum_heter_men$coefficients %>%
+region_southern_heter_men <- sum_heter_men$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1) %>%
   mutate(Df = summary(mod_heter_men)$df[2]) %>%
@@ -221,7 +221,7 @@ region_continental_heter_men <- sum_heter_men$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "men")
 
-region_continental_heter_women <- sum_heter_women$coefficients %>%
+region_southern_heter_women <- sum_heter_women$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1) %>%
   mutate(Df = summary(mod_heter_women)$df[2]) %>%
@@ -229,11 +229,11 @@ region_continental_heter_women <- sum_heter_women$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "women")
 
-region_continental_heter <- bind_rows(
-  region_continental_heter_men,
-  region_continental_heter_women
+region_southern_heter <- bind_rows(
+  region_southern_heter_men,
+  region_southern_heter_women
 ) %>%
-  mutate(region = "Continental")
+  mutate(region = "Southern")
 
 # 3.3 Hypergamy and hypogamy --------------------------------------------
 
@@ -300,7 +300,7 @@ left_join(
 sum_hyper_men <- summary(mod_hyper_men)
 sum_hyper_women <- summary(mod_hyper_women)
 
-region_continental_hyper_men <- sum_hyper_men$coefficients %>%
+region_southern_hyper_men <- sum_hyper_men$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1 | row_number() == 2) %>%
   mutate(Df = summary(mod_hyper_men)$df[2]) %>%
@@ -308,7 +308,7 @@ region_continental_hyper_men <- sum_hyper_men$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "men")
 
-region_continental_hyper_women <- sum_hyper_women$coefficients %>%
+region_southern_hyper_women <- sum_hyper_women$coefficients %>%
   as.data.frame() %>%
   filter(row_number() == 1 | row_number() == 2) %>%
   mutate(Df = summary(mod_hyper_women)$df[2]) %>%
@@ -316,13 +316,13 @@ region_continental_hyper_women <- sum_hyper_women$coefficients %>%
   rename(pattern = rowname) %>%
   mutate(gender = "women")
 
-region_continental_hyper <- bind_rows(
-  region_continental_hyper_men,
-  region_continental_hyper_women
+region_southern_hyper <- bind_rows(
+  region_southern_hyper_men,
+  region_southern_hyper_women
 ) %>%
-  mutate(region = "Continental")
+  mutate(region = "Southern")
 
-region_continental <- bind_rows(
-  region_continental_heter,
-  region_continental_hyper
+region_southern <- bind_rows(
+  region_southern_heter,
+  region_southern_hyper
 )

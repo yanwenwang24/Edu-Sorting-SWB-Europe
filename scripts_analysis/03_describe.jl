@@ -39,7 +39,7 @@ analyze_variables(
         ],
     weights=:anweight
 ) |> println
-
+prop(freqtable(sample, :hincfel, weights=sample.anweight))
 # Men
 analyze_variables(
     sample_men,
@@ -169,7 +169,13 @@ weighted_ttest(
 
 prop(freqtable(sample, :edu4_m, :edu4_f, weights=sample.anweight), margins=1)
 
-# 3 Sample size by country -------------------------------------------
+# Educational sorting ------------------------------------------------
+
+prop(freqtable(sample, :homo4, weights=sample.anweight))
+prop(freqtable(sample, :hyper4, weights=sample.anweight))
+prop(freqtable(sample, :hypo4, weights=sample.anweight))
+
+# 4 Sample size by country -------------------------------------------
 cntry_df = @chain sample begin
     @select(:cntry, :region)
     unique
