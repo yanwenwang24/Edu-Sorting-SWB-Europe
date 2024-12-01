@@ -46,7 +46,18 @@ sample_women$hhsize_scale <- scale(sample_women$hhsize)
 
 # 2 Fomulas ---------------------------------------------------------------
 
-fmla <- as.formula(paste0(
+fmla_base <- as.formula(paste0(
+  "lsat ~",
+  "edu4_r + hyper4 + hypo4 + ",
+  "age_scale + cohabit + divorce +
+  immigrant + minority + hhsize_scale + child_count + child_under6_present +
+  uempl + hincfel + ",
+  paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
+  " + ",
+  paste(grep("cntry_", names(sample), value = TRUE), collapse = "+")
+))
+
+fmla_inter <- as.formula(paste0(
   "lsat ~",
   "edu4_r + edu4_s + edu4_r * edu4_s + ",
   "age_scale + cohabit + divorce +
@@ -59,20 +70,42 @@ fmla <- as.formula(paste0(
 
 # 3 Fit models -----------------------------------------------------------
 
+# 3.1 Base ---------------------------------------------------------------
+
 # Men
-mod_men <- lm(
-  fmla,
+mod_base_men <- lm(
+  fmla_base,
   data = sample_men,
   weights = anweight
 )
 
-summ(mod_men, digits = 3)
+summ(mod_base_men, digits = 3)
 
 # Women
-mod_women <- lm(
-  fmla,
+mod_base_women <- lm(
+  fmla_base,
   data = sample_women,
   weights = anweight
 )
 
-summ(mod_women, digits = 3)
+summ(mod_base_women, digits = 3)
+
+# 3.2 Interaction ---------------------------------------------------------
+
+# Men
+mod_inter_men <- lm(
+  fmla_inter,
+  data = sample_men,
+  weights = anweight
+)
+
+summ(mod_inter_men, digits = 3)
+
+# Women
+mod_inter_women <- lm(
+  fmla_inter,
+  data = sample_women,
+  weights = anweight
+)
+
+summ(mod_inter_women, digits = 3)
