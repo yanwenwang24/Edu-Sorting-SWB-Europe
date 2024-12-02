@@ -27,6 +27,10 @@ sample <- read_feather("Datasets_tidy/sample.arrow")
 # Categorize education
 sample <- sample %>%
   mutate(
+    edu4_pair = paste0(edu4_r, edu4_s),
+    edu4_pair = factor(edu4_pair)
+  ) %>%
+  mutate(
     edu4_r = factor(edu4_r),
     edu4_s = factor(edu4_s)
   )
@@ -46,7 +50,8 @@ sample_women$hhsize_scale <- scale(sample_women$hhsize)
 
 # 2 Fomulas ---------------------------------------------------------------
 
-fmla_base <- as.formula(paste0(
+# Difference measures
+fmla_diff <- as.formula(paste0(
   "lsat ~",
   "edu4_r + hyper4 + hypo4 + ",
   "age_scale + cohabit + divorce +
@@ -57,9 +62,22 @@ fmla_base <- as.formula(paste0(
   paste(grep("cntry_", names(sample), value = TRUE), collapse = "+")
 ))
 
+# Compound measures
+fmla_compound <- as.formula(paste0(
+  "lsat ~",
+  "edu4_pair + ",
+  "age_scale + cohabit + divorce +
+  immigrant + minority + hhsize_scale + child_count + child_under6_present +
+  uempl + hincfel + ",
+  paste(grep("essround_", names(sample), value = TRUE), collapse = "+"),
+  " + ",
+  paste(grep("cntry_", names(sample), value = TRUE), collapse = "+")
+))
+
+# Interaction
 fmla_inter <- as.formula(paste0(
   "lsat ~",
-  "edu4_r + edu4_s + edu4_r * edu4_s + ",
+  "edu4_r*edu4_s + ",
   "age_scale + cohabit + divorce +
   immigrant + minority + hhsize_scale + child_count + child_under6_present +
   uempl + hincfel + ",
@@ -70,27 +88,47 @@ fmla_inter <- as.formula(paste0(
 
 # 3 Fit models -----------------------------------------------------------
 
-# 3.1 Base ---------------------------------------------------------------
+# 3.1 Difference measures ------------------------------------------------
 
 # Men
-mod_base_men <- lm(
-  fmla_base,
+mod_diff_men <- lm(
+  fmla_diff,
   data = sample_men,
   weights = anweight
 )
 
-summ(mod_base_men, digits = 3)
+summ(mod_diff_men, digits = 3)
 
 # Women
-mod_base_women <- lm(
-  fmla_base,
+mod_diff_women <- lm(
+  fmla_diff,
   data = sample_women,
   weights = anweight
 )
 
-summ(mod_base_women, digits = 3)
+summ(mod_diff_women, digits = 3)
 
-# 3.2 Interaction ---------------------------------------------------------
+# 3.2 Compound measures -------------------------------------------------
+
+# Men
+mod_compound_men <- lm(
+  fmla_compound,
+  data = sample_men,
+  weights = anweight
+)
+
+summ(mod_compound_men, digits = 3)
+
+# Women
+mod_compound_women <- lm(
+  fmla_compound,
+  data = sample_women,
+  weights = anweight
+)
+
+summ(mod_compound_women, digits = 3)
+
+# 3.3 Interaction models -----------------------------------------------
 
 # Men
 mod_inter_men <- lm(
